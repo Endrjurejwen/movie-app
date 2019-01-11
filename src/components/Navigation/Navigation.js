@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 import MenuButton from '../../elements/MenuButton';
 import Toggle from '../../utilities/Toggle';
+import SideDrawer from './SideDrawer/SideDrawer';
+import Backdrop from '../../elements/Backdrop';
 
 const navigation = () => (
   <NavContainer>
@@ -10,6 +12,8 @@ const navigation = () => (
       {({ on, toggle }) => (
         <>
           <MenuButton toggleMenu={toggle} open={on} />
+          <SideDrawer open={on} closeMenu={toggle} />
+          {on && <Backdrop close={toggle} />}
         </>
       )}
     </Toggle>
@@ -19,7 +23,7 @@ const navigation = () => (
 
 const NavContainer = styled.div`
   color: #fff;
-  background-color: purple;
+  background-color: #5E35B1;
   width: 100vw;
   height: 50px;
   position: fixed;
