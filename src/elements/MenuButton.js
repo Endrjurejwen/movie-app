@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import media from '../utilities/media';
+
 const menuButton = ({ toggleMenu, open }) => (
   <StyledButton onClick={toggleMenu}>
     <MenuIcon open={open} />
@@ -21,6 +23,10 @@ const StyledButton = styled.button`
   border: none;
   background-color: transparent;
   padding: 0 15px;
+
+  ${media.tablet`
+    display: none;
+  `}
 `;
 
 const MenuIcon = styled.div`

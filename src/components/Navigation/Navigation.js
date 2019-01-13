@@ -4,7 +4,9 @@ import styled from 'styled-components';
 import MenuButton from '../../elements/MenuButton';
 import Toggle from '../../utilities/Toggle';
 import SideDrawer from './SideDrawer/SideDrawer';
+import NavigationItems from './NavigationItems/NavigationItems';
 import Backdrop from '../../elements/Backdrop';
+import SearchBar from './SearchBar/SearchBar';
 
 const navigation = () => (
   <NavContainer>
@@ -17,11 +19,14 @@ const navigation = () => (
         </>
       )}
     </Toggle>
-    <div>Navigation list</div>
+    <div>Logo</div>
+    <SearchBar />
+    <NavigationItems desktop />
   </NavContainer>
 );
 
 const NavContainer = styled.div`
+  //position: relative;
   color: #fff;
   background-color: #5E35B1;
   width: 100vw;
