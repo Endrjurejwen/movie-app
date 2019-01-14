@@ -16,15 +16,20 @@ const navigationItems = ({ closeMenu, desktop }) => (
   <StyledNav desktop={desktop}>
     <NavigationList>
       {NAVIGATION_ITEMS.map(item => (
-        <NavigationItem key={item} name={item.name} closeMenu={closeMenu} />
+        <NavigationItem key={item.name} name={item.name} closeMenu={closeMenu} />
       ))}
     </NavigationList>
   </StyledNav>
 );
 
 navigationItems.propTypes = {
-  closeMenu: PropTypes.func.isRequired,
-  desktop: PropTypes.bool.isRequired,
+  closeMenu: PropTypes.func,
+  desktop: PropTypes.bool,
+};
+
+navigationItems.defaultProps = {
+  closeMenu: () => null,
+  desktop: false,
 };
 
 const StyledNav = styled.nav`

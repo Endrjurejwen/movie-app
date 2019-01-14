@@ -5,15 +5,35 @@ import PropTypes from 'prop-types';
 import Icon from '../../../utilities/icon';
 import media from '../../../utilities/media';
 
-const searchBar = () => (
+const searchBar = ({ change, click }) => (
   <StyledForm>
     <StyledLabel htmlFor="search">
       {'Search: '}
     </StyledLabel>
-    <StyledInput type="text" id="search" name="search" placeholder="Search..." />
-    <StyledButton type="submit"><Icon width="14px" height="14px" color="#5E35B1" name="search" /></StyledButton>
+    <StyledInput onChange={change} type="text" id="search" name="search" placeholder="Search..." />
+    <StyledCloseButton onClick={click} type="reset" className="btn--close">
+      <Icon
+        name="close"
+        width="14px"
+        height="12px"
+        color="#fff"
+      />
+    </StyledCloseButton>
+    <StyledSearchButton className="btn--search" type="submit">
+      <Icon
+        width="14px"
+        height="14px"
+        color="#5E35B1"
+        name="search"
+      />
+    </StyledSearchButton>
   </StyledForm>
 );
+
+searchBar.propTypes = {
+  change: PropTypes.func.isRequired,
+  click: PropTypes.func.isRequired,
+};
 
 const StyledForm = styled.form`
   margin: 0 20px; // refactor: maybe change container to grid to manipulate grid-row-gap and width
@@ -39,6 +59,14 @@ const StyledForm = styled.form`
     height: 100%;
     z-index: 50;
     margin: 0;
+
+    .btn--close {
+      display: flex;
+    }
+
+    .btn--search {
+        width: 60px;
+      }
   }
 
   ${media.tablet`
@@ -48,6 +76,10 @@ const StyledForm = styled.form`
       position: relative;
       border: 1px solid #fff;
       height: auto;
+
+      .btn--search {
+        width: 40px;
+      }
     }
   `}
 `;
@@ -64,7 +96,7 @@ const StyledLabel = styled.label`
 `;
 
 const StyledInput = styled.input`
-  width: 90%;
+  width: 70%;
   border: none;
   font-size: inherit;
   background-color: transparent;
@@ -74,9 +106,13 @@ const StyledInput = styled.input`
   &::placeholder {
     color: inherit;
   }
+
+  ${media.tablet`
+    width: 84%;
+  `}
 `;
 
-const StyledButton = styled.button`
+const StyledSearchButton = styled.button`
   position: absolute;
   top: 0;
   right: 0;
@@ -89,6 +125,26 @@ const StyledButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+
+/* REFACTOR - create element = buttonIcon */
+const StyledCloseButton = styled.button`
+  position: absolute;
+  top: 0;
+  right: 65px;
+  height: 100%;
+  width: 30px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: none;
+  justify-content: center;
+  align-items: center;
+
+  ${media.tablet`
+    right: 45px;
+  `}
 `;
 
 export default searchBar;
