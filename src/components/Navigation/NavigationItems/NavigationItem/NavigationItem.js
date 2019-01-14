@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 
 import media from '../../../../utilities/media';
 
 const navigationItem = ({ name, path, closeMenu }) => (
   <NavItem>
-    <Link onClick={closeMenu} href={path}>{name}</Link>
+    <Link onClick={closeMenu} to={path}>{name}</Link>
   </NavItem>
 );
 
@@ -34,7 +35,7 @@ const NavItem = styled.li`
   `}
 `;
 
-const Link = styled.a`
+const Link = styled(NavLink)`
   text-transform: uppercase;
   padding: 20px;
   font-size: 18px;
@@ -58,9 +59,13 @@ const Link = styled.a`
     height: 100%;
     display: flex;
     align-items: center;
+    border-bottom: 2px solid transparent;
 
-    &:hover,
-    &:focus {
+    &.active {
+      border-bottom: 2px solid #fff;
+    }
+
+    &:hover {
       color: pink;
       border-bottom: 2px solid #fff;
     }

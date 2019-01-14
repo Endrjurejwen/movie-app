@@ -6,17 +6,17 @@ import NavigationItem from './NavigationItem/NavigationItem';
 import media from '../../../utilities/media';
 
 const NAVIGATION_ITEMS = [
-  { name: 'Home', path: '/' },
-  { name: 'Movies', path: '/' },
-  { name: 'Favorites', path: '/' },
-  { name: 'Contact', path: '/' },
+  { name: 'Home', path: '/home' },
+  { name: 'Movies', path: '/movies' },
+  { name: 'Favorites', path: '/favorites' },
+  { name: 'Contact', path: '/contact' },
 ];
 
 const navigationItems = ({ closeMenu, desktop }) => (
   <StyledNav desktop={desktop}>
     <NavigationList>
       {NAVIGATION_ITEMS.map(item => (
-        <NavigationItem key={item.name} name={item.name} closeMenu={closeMenu} />
+        <NavigationItem key={item.name} name={item.name} path={item.path} closeMenu={closeMenu} />
       ))}
     </NavigationList>
   </StyledNav>

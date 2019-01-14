@@ -9,7 +9,7 @@ const Footer = () => (
 
 const StyledFooter = styled.div`
   height: 120px;
-  width: 100vw;
+  width: 100%;
   background-color: #3e2280;
   color: #eee;
   display: flex;

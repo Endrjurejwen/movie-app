@@ -2,45 +2,32 @@
 
 import React, { Component } from 'react';
 import './App.css';
-import styled from 'styled-components';
+import {
+  BrowserRouter, Route, Switch, Redirect,
+} from 'react-router-dom';
 
 import Layout from './components/Layout/Layout';
-import bg from './assets/images/clipart584687b.png';
-import media from './utilities/media';
+import Home from './components/Home/Home';
+import Movies from './components/Movies/Movies';
+
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Layout>
-          <StyledMain>
-            <Title>Movie Lovers</Title>
-          </StyledMain>
-        </Layout>
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <Layout>
+            <Switch>
+              <Route exact path="/home" component={Home} />
+              <Route path="/movies" component={Movies} />
+              <Redirect exact from="/" to="/home" />
+            </Switch>
+          </Layout>
+        </div>
+      </BrowserRouter>
+
     );
   }
 }
-
-const StyledMain = styled.main`
-  background-image: url(${bg});
-  background-size: 40%;
-  background-repeat: no-repeat;
-  background-position: 45% 25%;
-  height: 600px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  ${media.tablet`
-    background-size: 20%;
-    background-position: 80%;
-  `}
-`;
-
-const Title = styled.h1`
-  font-size: 34px;
-  color: #222;
-`;
 
 export default App;
