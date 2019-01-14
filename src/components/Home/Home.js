@@ -26,17 +26,26 @@ const StyledMain = styled.main`
 
   ${media.tablet`
     background-size: 20%;
-    background-position: 80%;
+    background-position: 80% 40%;
+    display: block;
+    position: relative;
   `}
 `;
 
 const Title = styled.h1`
-  font-size: 34px;
-  color: #222;
+  font-size: 44px;
+  color: #333;
 `;
 
 const Container = styled.div`
   padding: 30px;
+
+  ${media.tablet`
+    position: absolute;
+    top: 380px;
+    left: 80px;
+    text-align: left;
+  `}
 `;
 
 const CTAbutton = styled.button`
@@ -49,8 +58,8 @@ const CTAbutton = styled.button`
   font-weight: bold;
   border-radius: 4px;
   border: 2px solid #5E35B1;
-  background-color: transparent;
-  color: #222;
+  background-color: #5E35B1;
+  color: #eee;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .14);
   cursor: pointer
 `;

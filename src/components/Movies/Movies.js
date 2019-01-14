@@ -23,24 +23,34 @@ export default class Movies extends Component {
   render() {
     const { movies } = this.state;
     return (
-      <MoviesGrid>
-        {movies.map(movie => (
-          <MovieCard
-            key={movie.id}
-            title={movie.title}
-            date={movie.release_date}
-            bgImage={`https://image.tmdb.org/t/p/w500/${
-              movie.backdrop_path
-            }`}
-          />
-        ))}
-      </MoviesGrid>
+      <>
+        <h1
+          style={{
+            padding: '40px 0', fontSize: '35px', textTransform: 'uppercase', color: '#333',
+          }}
+        >
+          {'Top 20 New Movies'}
+        </h1>
+        <MoviesGrid>
+          {movies.map(movie => (
+            <MovieCard
+              key={movie.id}
+              title={movie.title}
+              date={movie.release_date}
+              bgImage={`https://image.tmdb.org/t/p/w500/${
+                movie.backdrop_path
+              }`}
+            />
+          ))}
+        </MoviesGrid>
+      </>
     );
   }
 }
 
 const MoviesGrid = styled.main`
+  padding: 30px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   grid-gap: 30px;
 `;

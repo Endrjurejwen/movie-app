@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
 
 import MenuButton from '../../elements/MenuButton';
-import Toggle from '../../utilities/Toggle';
 import SideDrawer from './SideDrawer/SideDrawer';
 import NavigationItems from './NavigationItems/NavigationItems';
 import Backdrop from '../../elements/Backdrop';
 import SearchBar from './SearchBar/SearchBar';
+import Logo from '../../utilities/Logo';
 
-export default class Navigation extends Component {
+import { toggleMenu } from '../../actions';
+
+class Navigation extends Component {
   state = {
     searchText: '',
   }
@@ -26,18 +31,13 @@ export default class Navigation extends Component {
   }
 
   render() {
+    const { menuOpen, toggleMenu } = this.props;
     return (
       <NavContainer>
-        <Toggle>
-          {({ on, toggle }) => (
-            <>
-              <MenuButton toggleMenu={toggle} open={on} />
-              <SideDrawer open={on} closeMenu={toggle} />
-              {on && <Backdrop close={toggle} />}
-            </>
-          )}
-        </Toggle>
-        <div>Logo</div>
+        <MenuButton toggleMenu={toggleMenu} open={menuOpen} />
+        <SideDrawer open={menuOpen} closeMenu={toggleMenu} />
+        {menuOpen && <Backdrop close={toggleMenu} />}
+        <Logo height="50%" />
         <SearchBar click={this.FocusOnInputHandler} change={this.InputChangeHandler} />
         <NavigationItems desktop />
       </NavContainer>
@@ -59,3 +59,13 @@ const NavContainer = styled.div`
   align-items: center;
   box-shadow: 0 3px 6px rgba(0, 0, 0, .14), 0 3px 6px rgba(0, 0, 0, .24);
 `;
+
+const mapStateToProps = state => ({
+  menuOpen: state.menu.menuOpen,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  toggleMenu,
+}, dispatch);
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navigation));

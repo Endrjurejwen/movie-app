@@ -3,11 +3,13 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import NavigationItems from '../NavigationItems/NavigationItems';
+import Logo from '../../../utilities/Logo';
 
 const sideDrawer = ({ open, closeMenu }) => (
   <Container open={open}>
     <StyledHeader>
-      <h2>Header</h2>
+      <h2>Movie Lovers</h2>
+      <Logo height="15%" />
     </StyledHeader>
     <NavigationItems closeMenu={closeMenu} />
     <StyledFooter>
@@ -43,7 +45,7 @@ const Container = styled.div`
 const StyledHeader = styled.header`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   border-bottom: 1px solid #fff;
 `;
 

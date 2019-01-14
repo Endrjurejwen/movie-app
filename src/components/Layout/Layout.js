@@ -16,7 +16,7 @@ const layout = ({ children }) => (
 );
 
 layout.propTypes = {
-  children: PropTypes.func.isRequired,
+  children: PropTypes.shape().isRequired,
 };
 
 const Container = styled.div`
