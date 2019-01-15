@@ -1,27 +1,28 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
+import { getMovies } from './actions';
 import MovieCard from './MovieCard/MovieCard';
 
-export default class Movies extends Component {
-  state = {
-    movies: [],
+class Movies extends Component {
+  static propTypes = {
+    movies: PropTypes.arrayOf(PropTypes.object).isRequired,
+    getMovies: PropTypes.func.isRequired,
+    isMoviesLoaded: PropTypes.bool.isRequired,
   }
 
   componentDidMount = () => {
-    this.loadMovies();
-  }
-
-  loadMovies = async () => {
-    const res = await axios.get(
-      'https://api.themoviedb.org/3/discover/movie?api_key=2ea6c981e89421d18fb325f98b6c4e46&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1',
-    );
-    this.setState({ movies: res.data.results });
+    const { getMovies, isMoviesLoaded } = this.props;
+    if (!isMoviesLoaded) {
+      getMovies();
+    }
   }
 
   render() {
-    const { movies } = this.state;
+    const { movies } = this.props;
     return (
       <>
         <h1
@@ -54,3 +55,14 @@ const MoviesGrid = styled.main`
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   grid-gap: 30px;
 `;
+
+const mapStateToProps = state => ({
+  movies: state.movies.movies,
+  isMoviesLoaded: state.movies.isMoviesLoaded,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getMovies,
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Movies);

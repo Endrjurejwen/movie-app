@@ -6,8 +6,9 @@ import {
   BrowserRouter, Route, Switch, Redirect,
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import thunk from 'redux-thunk';
 
 import rootReducer from './rootReducer';
 
@@ -18,7 +19,7 @@ import Movies from './components/Movies/Movies';
 const store = createStore(
   rootReducer,
   {},
-  composeWithDevTools(),
+  composeWithDevTools(applyMiddleware(thunk)),
 );
 
 class App extends Component {

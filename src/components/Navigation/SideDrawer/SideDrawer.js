@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import Logo from '../../../utilities/Logo';
 
-const sideDrawer = ({ open, closeMenu }) => (
-  <Container open={open}>
+const sideDrawer = ({ isOpen, closeMenu }) => (
+  <Container isOpen={isOpen}>
     <StyledHeader>
       <h2>Movie Lovers</h2>
       <Logo height="15%" />
@@ -19,7 +19,7 @@ const sideDrawer = ({ open, closeMenu }) => (
 );
 
 sideDrawer.propTypes = {
-  open: PropTypes.bool.isRequired,
+  isOpen: PropTypes.bool.isRequired,
   closeMenu: PropTypes.func.isRequired,
 };
 
@@ -39,7 +39,7 @@ const Container = styled.div`
   box-shadow: 3px 0px 6px rgba(0, 0, 0, 0.24);
 
   transition: all 0.2s cubic-bezier(0.63, 0.21, 0.66, 1);
-  transform: ${({ open }) => (open ? 'translateX(0)' : 'translateX(-100vw)')};
+  transform: ${({ isOpen }) => (isOpen ? 'translateX(0)' : 'translateX(-100vw)')};
 `;
 
 const StyledHeader = styled.header`

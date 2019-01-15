@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 
 import MenuButton from '../../elements/MenuButton';
 import SideDrawer from './SideDrawer/SideDrawer';
@@ -11,17 +12,12 @@ import Backdrop from '../../elements/Backdrop';
 import SearchBar from './SearchBar/SearchBar';
 import Logo from '../../utilities/Logo';
 
-import { toggleMenu } from '../../actions';
+import { toggleMenu } from './actions';
 
 class Navigation extends Component {
-  state = {
-    searchText: '',
-  }
-
-  InputChangeHandler = (event) => {
-    this.setState({
-      searchText: event.target.value,
-    });
+  static propTypes = {
+    isMenuOpen: PropTypes.bool.isRequired,
+    toggleMenu: PropTypes.func.isRequired,
   }
 
   FocusOnInputHandler = (event) => {
@@ -31,14 +27,14 @@ class Navigation extends Component {
   }
 
   render() {
-    const { menuOpen, toggleMenu } = this.props;
+    const { isMenuOpen, toggleMenu } = this.props;
     return (
       <NavContainer>
-        <MenuButton toggleMenu={toggleMenu} open={menuOpen} />
-        <SideDrawer open={menuOpen} closeMenu={toggleMenu} />
-        {menuOpen && <Backdrop close={toggleMenu} />}
+        <MenuButton toggleMenu={toggleMenu} isOpen={isMenuOpen} />
+        <SideDrawer isOpen={isMenuOpen} closeMenu={toggleMenu} />
+        {isMenuOpen && <Backdrop close={toggleMenu} />}
         <Logo height="50%" />
-        <SearchBar click={this.FocusOnInputHandler} change={this.InputChangeHandler} />
+        <SearchBar click={this.FocusOnInputHandler} />
         <NavigationItems desktop />
       </NavContainer>
     );
@@ -61,7 +57,7 @@ const NavContainer = styled.div`
 `;
 
 const mapStateToProps = state => ({
-  menuOpen: state.menu.menuOpen,
+  isMenuOpen: state.menu.isMenuOpen,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

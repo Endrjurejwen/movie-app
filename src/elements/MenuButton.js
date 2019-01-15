@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 
 import media from '../utilities/media';
 
-const menuButton = ({ toggleMenu, open }) => (
+const menuButton = ({ toggleMenu, isOpen }) => (
   <StyledButton onClick={toggleMenu}>
-    <MenuIcon open={open} />
+    <MenuIcon isOpen={isOpen} />
   </StyledButton>
 );
 
 menuButton.propTypes = {
   toggleMenu: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired,
+  isOpen: PropTypes.bool.isRequired,
 };
 
 const StyledButton = styled.button`
@@ -31,7 +31,7 @@ const StyledButton = styled.button`
 
 const MenuIcon = styled.div`
   position: relative;
-  background-color: ${({ open }) => (open ? 'transparent' : '#fff')};
+  background-color: ${({ isOpen }) => (isOpen ? 'transparent' : '#fff')};
   width: 22px;
   height: 2px;
 
@@ -46,13 +46,13 @@ const MenuIcon = styled.div`
   }
 
   &::before {
-    top: ${({ open }) => (open ? '0' : '-6px')};
-    transform: ${({ open }) => (open ? 'rotate(135deg)' : 'rotate(0deg)')};
+    top: ${({ isOpen }) => (isOpen ? '0' : '-6px')};
+    transform: ${({ isOpen }) => (isOpen ? 'rotate(135deg)' : 'rotate(0deg)')};
   }
 
   &::after {
-    top: ${({ open }) => (open ? '0' : '6px')};
-    transform: ${({ open }) => (open ? 'rotate(-135deg)' : 'rotate(0deg)')};
+    top: ${({ isOpen }) => (isOpen ? '0' : '6px')};
+    transform: ${({ isOpen }) => (isOpen ? 'rotate(-135deg)' : 'rotate(0deg)')};
   }
 `;
 

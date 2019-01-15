@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 import Icon from '../../../utilities/icon';
 import media from '../../../utilities/media';
 
-const searchBar = ({ change, click }) => (
+const searchBar = ({ click }) => (
   <StyledForm>
     <StyledLabel htmlFor="search">
       {'Search: '}
     </StyledLabel>
-    <StyledInput onChange={change} type="text" id="search" name="search" placeholder="Search..." />
+    <StyledInput type="text" id="search" name="search" placeholder="Search..." />
     <StyledCloseButton onClick={click} type="reset" className="btn--close">
       <Icon
         name="close"
@@ -31,7 +31,6 @@ const searchBar = ({ change, click }) => (
 );
 
 searchBar.propTypes = {
-  change: PropTypes.func.isRequired,
   click: PropTypes.func.isRequired,
 };
 

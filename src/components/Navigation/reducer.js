@@ -1,7 +1,7 @@
 import { TOGGLE_MENU } from './actions';
 
 const initialState = {
-  menuOpen: false,
+  isMenuOpen: false,
 };
 
 export default function (state = initialState, action) {
@@ -10,7 +10,7 @@ export default function (state = initialState, action) {
     case TOGGLE_MENU:
       return {
         ...state,
-        menuOpen: !state.menuOpen,
+        isMenuOpen: !state.isMenuOpen,
       };
     default:
       return state;

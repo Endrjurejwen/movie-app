@@ -5,7 +5,9 @@ import { NavLink } from 'react-router-dom';
 
 import media from '../../../../utilities/media';
 
-const navigationItem = ({ name, path, closeMenu }) => (
+const navigationItem = ({
+  name, path, closeMenu,
+}) => (
   <NavItem>
     <Link onClick={closeMenu} to={path}>{name}</Link>
   </NavItem>
