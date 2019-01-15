@@ -22,6 +22,7 @@ layout.propTypes = {
 const Container = styled.div`
   background-image: linear-gradient(to right top, #eeeeee, #e6e4ed, #ded9ec, #d7cfeb, #d1c4e9);
   margin-top: 40px;
+  min-height: 100vh;
 `;
 
 export default layout;

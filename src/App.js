@@ -15,6 +15,7 @@ import rootReducer from './rootReducer';
 import Layout from './components/Layout/Layout';
 import Home from './components/Home/Home';
 import Movies from './components/Movies/Movies';
+import MovieDetails from './components/Movies/MovieDetails';
 
 const store = createStore(
   rootReducer,
@@ -31,7 +32,8 @@ class App extends Component {
             <Layout>
               <Switch>
                 <Route exact path="/home" component={Home} />
-                <Route path="/movies" component={Movies} />
+                <Route exact path="/movies" component={Movies} />
+                <Route path="/movies/:movie_id" component={MovieDetails} />
                 <Redirect exact from="/" to="/home" />
               </Switch>
             </Layout>

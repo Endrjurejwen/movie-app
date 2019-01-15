@@ -34,7 +34,7 @@ const Container = styled.div`
   height: 100vh;
   width: 80vw;
   z-index: 30;
-  background-color: #3b2170;
+  background-color: rgba(59, 33, 112, .95);
   color: #fff;
   box-shadow: 3px 0px 6px rgba(0, 0, 0, 0.24);
 

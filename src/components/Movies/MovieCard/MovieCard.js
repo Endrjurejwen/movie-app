@@ -5,14 +5,14 @@ import PropTypes from 'prop-types';
 import Icon from '../../../utilities/icon';
 
 const movieCard = ({
-  title, date, bgImage,
+  title, date, bgImage, readMore,
 }) => (
   <Card>
     <Background backgroundImage={bgImage} />
     <Details>
       <Title>{title}</Title>
       <Description>{date}</Description>
-      <MoreButton type="button">Read more</MoreButton>
+      <MoreButton type="button" onClick={readMore}>Read more</MoreButton>
       <LoveButton type="button"><Icon name="love" width="30px" height="30px" color="#5E35B1" /></LoveButton>
     </Details>
   </Card>
@@ -22,6 +22,7 @@ movieCard.propTypes = {
   title: PropTypes.string,
   date: PropTypes.string,
   bgImage: PropTypes.string,
+  readMore: PropTypes.func.isRequired,
 };
 
 movieCard.defaultProps = {

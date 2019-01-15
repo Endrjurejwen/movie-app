@@ -12,6 +12,7 @@ class Movies extends Component {
     movies: PropTypes.arrayOf(PropTypes.object).isRequired,
     getMovies: PropTypes.func.isRequired,
     isMoviesLoaded: PropTypes.bool.isRequired,
+    history: PropTypes.shape().isRequired,
   }
 
   componentDidMount = () => {
@@ -19,6 +20,11 @@ class Movies extends Component {
     if (!isMoviesLoaded) {
       getMovies();
     }
+  }
+
+  toMovieDetailsHandler = (id) => {
+    const { history } = this.props;
+    history.push(`/movies/${id}`);
   }
 
   render() {
@@ -41,6 +47,7 @@ class Movies extends Component {
               bgImage={`https://image.tmdb.org/t/p/w500/${
                 movie.backdrop_path
               }`}
+              readMore={() => this.toMovieDetailsHandler(movie.id)}
             />
           ))}
         </MoviesGrid>
