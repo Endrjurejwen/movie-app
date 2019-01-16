@@ -25,6 +25,7 @@ module.exports = {
       "react/jsx-filename-extension": 0,
       "function-paren-newline": 0,
       "linebreak-style": 0,
-      "eol-last": 0
+      "eol-last": 0,
+      "no-shadow": "off",
     }
   };

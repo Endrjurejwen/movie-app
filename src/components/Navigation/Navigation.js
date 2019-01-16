@@ -13,11 +13,40 @@ import SearchBar from './SearchBar/SearchBar';
 import Logo from '../../utilities/Logo';
 
 import { toggleMenu } from './actions';
+import { getSearchMovies } from '../Movies/actions';
 
 class Navigation extends Component {
   static propTypes = {
     isMenuOpen: PropTypes.bool.isRequired,
     toggleMenu: PropTypes.func.isRequired,
+    getSearchMovies: PropTypes.func.isRequired,
+    history: PropTypes.shape().isRequired,
+  }
+
+  state = {
+    searchText: '',
+  }
+
+  changeHandler = (event) => {
+    this.setState({
+      searchText: event.target.value,
+    });
+  }
+
+  submitHandler = (event) => {
+    const { searchText } = this.state;
+    const { getSearchMovies, history } = this.props;
+    event.preventDefault();
+    const query = searchText.replace(/\s+/g, '%20');
+    getSearchMovies(query);
+
+    history.push({
+      pathname: '/search',
+      search: `query=${query}`,
+    });
+    this.setState({
+      searchText: '',
+    });
   }
 
   FocusOnInputHandler = (event) => {
@@ -27,6 +56,7 @@ class Navigation extends Component {
   }
 
   render() {
+    const { searchText } = this.state;
     const { isMenuOpen, toggleMenu } = this.props;
     return (
       <NavContainer>
@@ -34,7 +64,12 @@ class Navigation extends Component {
         <SideDrawer isOpen={isMenuOpen} closeMenu={toggleMenu} />
         {isMenuOpen && <Backdrop close={toggleMenu} />}
         <Logo height="50%" />
-        <SearchBar click={this.FocusOnInputHandler} />
+        <SearchBar
+          change={this.changeHandler}
+          submit={this.submitHandler}
+          click={this.FocusOnInputHandler}
+          text={searchText}
+        />
         <NavigationItems desktop />
       </NavContainer>
     );
@@ -62,6 +97,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   toggleMenu,
+  getSearchMovies,
 }, dispatch);
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navigation));

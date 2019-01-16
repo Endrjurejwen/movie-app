@@ -4,12 +4,12 @@ import styled from 'styled-components';
 import bg from '../../assets/images/clipart584687b.png';
 import media from '../../utilities/media';
 
-const home = () => (
+const home = props => (
   <StyledMain>
     <Container>
       <Title>Movie Lovers</Title>
       <p>Explore movies, write reviews and collect what you love.</p>
-      <CTAbutton type="button">Explore movies</CTAbutton>
+      <CTAbutton type="button" onClick={() => props.history.push('/movies')}>Explore movies</CTAbutton>
     </Container>
   </StyledMain>
 );
@@ -18,7 +18,7 @@ const StyledMain = styled.main`
   background-image: url(${bg});
   background-size: 40%;
   background-repeat: no-repeat;
-  background-position: 45% 15%;
+  background-position: 45% 35px;
   height: 100vh;
   display: flex;
   align-items: center;

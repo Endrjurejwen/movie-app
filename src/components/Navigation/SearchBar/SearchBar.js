@@ -1,16 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { getSearchMovies } from '../../Movies/actions';
 
 import Icon from '../../../utilities/icon';
 import media from '../../../utilities/media';
 
-const searchBar = ({ click }) => (
-  <StyledForm>
+const searchBar = ({
+  click, change, text, submit,
+}) => (
+  <StyledForm onSubmit={submit}>
     <StyledLabel htmlFor="search">
       {'Search: '}
     </StyledLabel>
-    <StyledInput type="text" id="search" name="search" placeholder="Search..." />
+    <StyledInput onChange={change} type="text" id="search" name="search" value={text} placeholder="Search..." />
     <StyledCloseButton onClick={click} type="reset" className="btn--close">
       <Icon
         name="close"
@@ -32,6 +38,13 @@ const searchBar = ({ click }) => (
 
 searchBar.propTypes = {
   click: PropTypes.func.isRequired,
+  change: PropTypes.func.isRequired,
+  submit: PropTypes.func.isRequired,
+  text: PropTypes.string,
+};
+
+searchBar.defaultProps = {
+  text: '',
 };
 
 const StyledForm = styled.form`
@@ -146,4 +159,8 @@ const StyledCloseButton = styled.button`
   `}
 `;
 
-export default searchBar;
+const mapDispatchToProps = dispatch => bindActionCreators({
+  getSearchMovies,
+}, dispatch);
+
+export default withRouter(connect(null, mapDispatchToProps)(searchBar));

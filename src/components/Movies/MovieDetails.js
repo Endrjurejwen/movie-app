@@ -4,13 +4,25 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { getMovie } from './actions';
+import { getMovie, resetMovie } from './actions';
 import media from '../../utilities/media';
 
 class MovieDetails extends Component {
+  static propTypes = {
+    getMovie: PropTypes.func.isRequired,
+    resetMovie: PropTypes.func.isRequired,
+    movie: PropTypes.shape().isRequired,
+    match: PropTypes.shape().isRequired,
+  }
+
   componentDidMount = () => {
     const { getMovie, match } = this.props;
     getMovie(match.params.movie_id);
+  }
+
+  componentWillUnmount = () => {
+    const { resetMovie } = this.props;
+    resetMovie();
   }
 
   render() {
@@ -77,6 +89,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getMovie,
+  resetMovie,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(MovieDetails);
