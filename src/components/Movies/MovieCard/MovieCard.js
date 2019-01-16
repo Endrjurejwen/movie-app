@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Icon from '../../../utilities/icon';
 
 const movieCard = ({
-  title, date, bgImage, readMore,
+  title, date, bgImage, readMore, addOrRemoveFavorite,
 }) => (
   <Card>
     <Background backgroundImage={bgImage} />
@@ -13,7 +13,7 @@ const movieCard = ({
       <Title>{title}</Title>
       <Description>{date}</Description>
       <MoreButton type="button" onClick={readMore}>Read more</MoreButton>
-      <LoveButton type="button"><Icon name="love" width="30px" height="30px" color="#5E35B1" /></LoveButton>
+      <LoveButton onClick={addOrRemoveFavorite} type="button"><Icon name="love" width="30px" height="30px" color="#5E35B1" /></LoveButton>
     </Details>
   </Card>
 );
@@ -23,6 +23,7 @@ movieCard.propTypes = {
   date: PropTypes.string,
   bgImage: PropTypes.string,
   readMore: PropTypes.func.isRequired,
+  addOrRemoveFavorite: PropTypes.func.isRequired,
 };
 
 movieCard.defaultProps = {

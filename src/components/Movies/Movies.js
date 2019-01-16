@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { getMovies } from './actions';
-import MovieCard from './MovieCard/MovieCard';
+import MoviesGrid from './MoviesGrid/MoviesGrid';
+
+import { addToFavorites } from '../Favorites/actions';
 
 class Movies extends Component {
   static propTypes = {
     movies: PropTypes.arrayOf(PropTypes.object).isRequired,
     getMovies: PropTypes.func.isRequired,
     isMoviesLoaded: PropTypes.bool.isRequired,
-    history: PropTypes.shape().isRequired,
   }
 
   componentDidMount = () => {
@@ -22,9 +22,11 @@ class Movies extends Component {
     }
   }
 
-  toMovieDetailsHandler = (id) => {
-    const { history } = this.props;
-    history.push(`/movies/${id}`);
+  addToFavoritesHandler = (id) => {
+    const { movies, addToFavorites } = this.props;
+    const favoriteMovie = movies.find(movie => movie.id === id);
+    addToFavorites(favoriteMovie);
+    console.log(id);
   }
 
   render() {
@@ -38,30 +40,11 @@ class Movies extends Component {
         >
           {'Top 20 New Movies'}
         </h1>
-        <MoviesGrid>
-          {movies.map(movie => (
-            <MovieCard
-              key={movie.id}
-              title={movie.title}
-              date={movie.release_date}
-              bgImage={`https://image.tmdb.org/t/p/w500/${
-                movie.backdrop_path
-              }`}
-              readMore={() => this.toMovieDetailsHandler(movie.id)}
-            />
-          ))}
-        </MoviesGrid>
+        <MoviesGrid movies={movies} addOrRemoveFavorite={this.addToFavoritesHandler} />
       </>
     );
   }
 }
-
-const MoviesGrid = styled.main`
-  padding: 30px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  grid-gap: 30px;
-`;
 
 const mapStateToProps = state => ({
   movies: state.movies.movies,
@@ -70,6 +53,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   getMovies,
+  addToFavorites,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Movies);
