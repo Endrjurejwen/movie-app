@@ -6,6 +6,9 @@ export const GET_MOVIES = 'GET_MOVIES';
 export const GET_MOVIE = 'GET_MOVIE';
 export const RESET_MOVIE = 'RESET_MOVIE';
 export const GET_SEARCH_MOVIES = 'GET_SEARCH_MOVIES';
+export const CHECK_IF_FAVORITES = 'CHECK_IF_FAVORITES';
+export const ADD_MOVIE_TO_FAVORITES = 'ADD_MOVIE_TO_FAVORITES';
+export const REMOVE_MOVIE_FROM_FAVORITES = 'REMOVE_MOVIE_FROM_FAVORITES';
 
 export const getMovies = () => async function (dispatch) {
   const result = await axios.get(
@@ -39,4 +42,49 @@ export const getSearchMovies = query => async function (dispatch) {
 
 export const resetMovie = () => ({
   type: 'RESET_MOVIE',
+});
+
+export const checkIfFavorites = (movies, favorites) => {
+  let moviesUpdated = [];
+
+  const moviesID = movies.map(movie => movie.id);
+
+  const favoritesID = favorites.map(movie => movie.id);
+
+  const favoriteMoviesIDs = moviesID.filter(movieID => favoritesID.indexOf(movieID) !== -1);
+
+  moviesUpdated = movies.map((movie) => {
+    if (favoriteMoviesIDs.includes(movie.id)) {
+      return {
+        ...movie,
+        isFavorite: true,
+      };
+    }
+    return {
+      ...movie,
+      isFavorite: false,
+    };
+  },
+  );
+
+  return {
+    type: 'CHECK_IF_FAVORITES',
+    data: moviesUpdated,
+  };
+};
+
+export const addToFavorites = movie => ({
+  type: 'ADD_MOVIE_TO_FAVORITES',
+  data: {
+    ...movie,
+    isFavorite: true,
+  },
+});
+
+export const removeFromFavorites = movie => ({
+  type: 'REMOVE_MOVIE_FROM_FAVORITES',
+  data: {
+    ...movie,
+    isFavorite: false,
+  },
 });

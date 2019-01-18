@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import MovieCard from '../MovieCard/MovieCard';
 
 const MoviesGrid = ({
-  movies, history, addOrRemoveFavorite,
+  movies, history, add, remove,
 }) => {
   const toMovieDetailsHandler = (id) => {
     history.push(`/movies/${id}`);
@@ -22,7 +22,8 @@ const MoviesGrid = ({
             movie.backdrop_path
           }`}
           readMore={() => toMovieDetailsHandler(movie.id)}
-          addOrRemoveFavorite={() => addOrRemoveFavorite(movie.id)}
+          addOrRemoveFavorite={movie.isFavorite ? () => remove(movie.id) : () => add(movie.id)}
+          iconName={movie.isFavorite ? 'fullLove' : 'love'}
         />
       ))}
     </GridWrapper>
@@ -32,7 +33,12 @@ const MoviesGrid = ({
 MoviesGrid.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.object).isRequired,
   history: PropTypes.shape().isRequired,
-  addOrRemoveFavorite: PropTypes.func.isRequired,
+  add: PropTypes.func,
+  remove: PropTypes.func.isRequired,
+};
+
+MoviesGrid.defaultProps = {
+  add: () => this.props.movies,
 };
 
 const GridWrapper = styled.main`
