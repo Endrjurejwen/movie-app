@@ -5,10 +5,12 @@ import axios from 'axios';
 export const GET_MOVIES = 'GET_MOVIES';
 export const GET_MOVIE = 'GET_MOVIE';
 export const RESET_MOVIE = 'RESET_MOVIE';
+export const RESET_MOVIES = 'RESET_MOVIES';
 export const GET_SEARCH_MOVIES = 'GET_SEARCH_MOVIES';
 export const CHECK_IF_FAVORITES = 'CHECK_IF_FAVORITES';
 export const ADD_MOVIE_TO_FAVORITES = 'ADD_MOVIE_TO_FAVORITES';
 export const REMOVE_MOVIE_FROM_FAVORITES = 'REMOVE_MOVIE_FROM_FAVORITES';
+export const CHECK_IF_FAVORITE = 'CHECK_IF_FAVORITE';
 
 export const getMovies = () => async function (dispatch) {
   const result = await axios.get(
@@ -30,6 +32,11 @@ export const getMovie = id => async function (dispatch) {
   });
 };
 
+// export const getMovie = id => ({
+//   type: 'GET_MOVIE',
+//   data: parseInt(id, 10),
+// });
+
 export const getSearchMovies = query => async function (dispatch) {
   const result = await axios.get(
     `https://api.themoviedb.org/3/search/movie?api_key=2ea6c981e89421d18fb325f98b6c4e46&language=en-US&query=${query}&page=1&include_adult=false`,
@@ -44,6 +51,10 @@ export const resetMovie = () => ({
   type: 'RESET_MOVIE',
 });
 
+export const resetMovies = () => ({
+  type: 'RESET_MOVIES',
+});
+
 export const checkIfFavorites = (movies, favorites) => {
   let moviesUpdated = [];
 
@@ -51,10 +62,12 @@ export const checkIfFavorites = (movies, favorites) => {
 
   const favoritesID = favorites.map(movie => movie.id);
 
-  const favoriteMoviesIDs = moviesID.filter(movieID => favoritesID.indexOf(movieID) !== -1);
+  const favoriteMoviesIDs = moviesID.filter(movieID => favoritesID.includes(movieID));
 
   moviesUpdated = movies.map((movie) => {
-    if (favoriteMoviesIDs.includes(movie.id)) {
+    const isFavorite = favoriteMoviesIDs.includes(movie.id);
+
+    if (isFavorite) {
       return {
         ...movie,
         isFavorite: true,
@@ -70,6 +83,30 @@ export const checkIfFavorites = (movies, favorites) => {
   return {
     type: 'CHECK_IF_FAVORITES',
     data: moviesUpdated,
+  };
+};
+
+export const checkIfFavorite = (movie, favorites) => {
+  let movieUpdated = {};
+
+  const favoritesID = favorites.map(favorite => favorite.id);
+
+  const isFavorite = favoritesID.includes(movie.id);
+  if (isFavorite) {
+    movieUpdated = {
+      ...movie,
+      isFavorite: true,
+    };
+  } else {
+    movieUpdated = {
+      ...movie,
+      isFavorite: false,
+    };
+  }
+
+  return {
+    type: 'CHECK_IF_FAVORITE',
+    data: movieUpdated,
   };
 };
 

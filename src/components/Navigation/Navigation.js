@@ -13,13 +13,13 @@ import SearchBar from './SearchBar/SearchBar';
 import Logo from '../../utilities/Logo';
 
 import { toggleMenu } from './actions';
-import { getSearchMovies } from '../Movies/actions';
+import { getSearchMovies, resetMovies } from '../Movies/actions';
 
 class Navigation extends Component {
   static propTypes = {
     isMenuOpen: PropTypes.bool.isRequired,
     toggleMenu: PropTypes.func.isRequired,
-    getSearchMovies: PropTypes.func.isRequired,
+    resetMovies: PropTypes.func.isRequired,
     history: PropTypes.shape().isRequired,
   }
 
@@ -35,14 +35,14 @@ class Navigation extends Component {
 
   submitHandler = (event) => {
     const { searchText } = this.state;
-    const { getSearchMovies, history } = this.props;
+    const { history, resetMovies } = this.props;
     event.preventDefault();
     const query = searchText.replace(/\s+/g, '%20');
-    getSearchMovies(query);
+    resetMovies();
 
     history.push({
       pathname: '/search',
-      search: `query=${query}`,
+      search: query,
     });
     this.setState({
       searchText: '',
@@ -98,6 +98,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   toggleMenu,
   getSearchMovies,
+  resetMovies,
 }, dispatch);
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navigation));

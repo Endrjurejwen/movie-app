@@ -35,7 +35,7 @@ class App extends Component {
               <Switch>
                 <Route exact path="/home" component={Home} />
                 <Route exact path="/movies" component={Movies} />
-                <Route exact path="/search" component={MovieSearchList} />
+                <Route path="/search" component={MovieSearchList} />
                 <Route exact path="/favorites" component={Favorites} />
                 <Route path="/movies/:movie_id" component={MovieDetails} />
                 <Redirect exact from="/" to="/home" />

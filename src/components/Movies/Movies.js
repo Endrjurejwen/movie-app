@@ -4,8 +4,13 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import {
-  getMovies, checkIfFavorites, addToFavorites, removeFromFavorites,
+  getMovies,
+  checkIfFavorites,
+  addToFavorites,
+  removeFromFavorites,
+  resetMovies,
 } from './actions';
+
 import MoviesGrid from './MoviesGrid/MoviesGrid';
 
 class Movies extends Component {
@@ -18,13 +23,13 @@ class Movies extends Component {
     isMoviesChecked: PropTypes.bool.isRequired,
     addToFavorites: PropTypes.func.isRequired,
     removeFromFavorites: PropTypes.func.isRequired,
+    resetMovies: PropTypes.func.isRequired,
   }
 
   componentDidMount = () => {
-    const {
-      getMovies, isMoviesLoaded,
-    } = this.props;
+    const { getMovies, isMoviesLoaded, resetMovies } = this.props;
     if (!isMoviesLoaded) {
+      resetMovies();
       getMovies();
     }
   }
@@ -42,7 +47,6 @@ class Movies extends Component {
     const { movies, addToFavorites } = this.props;
     const favoriteMovie = movies.find(movie => movie.id === id);
     addToFavorites(favoriteMovie);
-    console.log(id);
   }
 
   removeFromFavoritesHandler = (id) => {
@@ -52,9 +56,7 @@ class Movies extends Component {
   }
 
   render() {
-    const {
-      movies,
-    } = this.props;
+    const { movies } = this.props;
     return (
       <>
         <h1
@@ -86,6 +88,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   checkIfFavorites,
   addToFavorites,
   removeFromFavorites,
+  resetMovies,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Movies);
