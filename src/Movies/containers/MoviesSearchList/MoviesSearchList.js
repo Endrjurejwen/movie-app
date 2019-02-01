@@ -8,36 +8,49 @@ import {
   checkIfFavorites,
   addToFavorites,
   removeFromFavorites,
-  resetMovies,
-} from './actions';
+  getSearchMovies,
+} from '../../actions';
 
-import MoviesGrid from './MoviesGrid/MoviesGrid';
+import MoviesGrid from '../../components/MoviesGrid/MoviesGrid';
 
-class Movies extends Component {
+class moviesSearchList extends Component {
   static propTypes = {
     movies: PropTypes.arrayOf(PropTypes.object).isRequired,
-    getMovies: PropTypes.func.isRequired,
-    isMoviesLoaded: PropTypes.bool.isRequired,
+    getSearchMovies: PropTypes.func.isRequired,
+    isMoviesSearchListLoaded: PropTypes.bool.isRequired,
     checkIfFavorites: PropTypes.func.isRequired,
     favorites: PropTypes.arrayOf(PropTypes.object).isRequired,
     isMoviesChecked: PropTypes.bool.isRequired,
     addToFavorites: PropTypes.func.isRequired,
     removeFromFavorites: PropTypes.func.isRequired,
-    resetMovies: PropTypes.func.isRequired,
+    location: PropTypes.shape().isRequired,
   }
 
   componentDidMount = () => {
-    const { getMovies, isMoviesLoaded, resetMovies } = this.props;
-    if (!isMoviesLoaded) {
-      resetMovies();
-      getMovies();
+    const { location, getSearchMovies, isMoviesSearchListLoaded } = this.props;
+
+    const query = location.search.substring(1);
+    if (!isMoviesSearchListLoaded) {
+      getSearchMovies(query);
     }
   }
 
   componentDidUpdate = () => {
     const {
-      checkIfFavorites, movies, favorites, isMoviesChecked,
+      checkIfFavorites,
+      movies,
+      favorites,
+      isMoviesChecked,
+      location,
+      isMoviesSearchListLoaded,
+      getSearchMovies,
     } = this.props;
+
+    const query = location.search.substring(1);
+    if (!isMoviesSearchListLoaded) {
+      getSearchMovies(query);
+    }
+
     if (!isMoviesChecked) {
       checkIfFavorites(movies, favorites);
     }
@@ -64,7 +77,7 @@ class Movies extends Component {
             padding: '40px 0', fontSize: '35px', textTransform: 'uppercase', color: '#333',
           }}
         >
-          {'Top 20 New Movies'}
+          {'Your Search Movies'}
         </h1>
         <MoviesGrid
           movies={movies}
@@ -81,6 +94,8 @@ const mapStateToProps = state => ({
   isMoviesLoaded: state.movies.isMoviesLoaded,
   favorites: state.movies.favoritesMovies,
   isMoviesChecked: state.movies.isMoviesChecked,
+  moviesSearchList: state.movies.moviesSearchList,
+  isMoviesSearchListLoaded: state.movies.isMoviesSearchListLoaded,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -88,7 +103,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   checkIfFavorites,
   addToFavorites,
   removeFromFavorites,
-  resetMovies,
+  getSearchMovies,
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Movies);
+export default connect(mapStateToProps, mapDispatchToProps)(moviesSearchList);

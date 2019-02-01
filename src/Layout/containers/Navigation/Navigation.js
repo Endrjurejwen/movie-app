@@ -5,15 +5,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
-import MenuButton from '../../elements/MenuButton';
-import SideDrawer from './SideDrawer/SideDrawer';
-import NavigationItems from './NavigationItems/NavigationItems';
-import Backdrop from '../../elements/Backdrop';
-import SearchBar from './SearchBar/SearchBar';
-import Logo from '../../utilities/Logo';
+import MenuButton from '../../../elements/MenuButton';
+import SideDrawer from '../../components/SideDrawer/SideDrawer';
+import NavigationItems from '../../components/NavigationItems/NavigationItems';
+import Backdrop from '../../../elements/Backdrop';
+import SearchBar from '../../components/SearchBar/SearchBar';
+import Logo from '../../../utilities/Logo';
 
-import { toggleMenu } from './actions';
-import { getSearchMovies, resetMovies } from '../Movies/actions';
+import { toggleMenu } from '../../actions';
+import { getSearchMovies, resetMovies } from '../../../Movies/actions';
 
 class Navigation extends Component {
   static propTypes = {

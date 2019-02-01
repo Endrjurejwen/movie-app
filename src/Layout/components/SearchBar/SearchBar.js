@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { getSearchMovies } from '../../Movies/actions';
+import { getSearchMovies } from '../../../Movies/actions';
 
 import Icon from '../../../utilities/icon';
 import media from '../../../utilities/media';

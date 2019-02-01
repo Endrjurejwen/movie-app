@@ -11,10 +11,10 @@ import {
   checkIfFavorites,
   removeFromFavorites,
   addToFavorites,
-} from './actions';
+} from '../../actions';
 
-import media from '../../utilities/media';
-import Icon from '../../utilities/icon';
+import media from '../../../utilities/media';
+import Icon from '../../../utilities/icon';
 
 class MovieDetails extends Component {
   static propTypes = {

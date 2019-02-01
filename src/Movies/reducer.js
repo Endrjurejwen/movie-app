@@ -37,9 +37,6 @@ export default function (state = initialState, action) {
         movie: data,
         isMovieLoaded: true,
         isMovieChecked: false,
-        // ...state,
-        // movie: [...state.movies].find(movie => movie.id === data),
-        // isMovieLoaded: true,
       };
     case RESET_MOVIE:
       return {

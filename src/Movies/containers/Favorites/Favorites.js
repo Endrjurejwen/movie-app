@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import MoviesGrid from '../Movies/MoviesGrid/MoviesGrid';
+import MoviesGrid from '../../components/MoviesGrid/MoviesGrid';
 
-import { removeFromFavorites, checkIfFavorites } from '../Movies/actions';
+import { removeFromFavorites, checkIfFavorites } from '../../actions';
 
 class Favorites extends Component {
   static propTypes = {

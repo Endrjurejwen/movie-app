@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import bg from '../../assets/images/clipart584687b.png';
-import media from '../../utilities/media';
+import bg from '../../../assets/images/clipart584687b.png';
+import media from '../../../utilities/media';
 
 const home = props => (
   <StyledMain>

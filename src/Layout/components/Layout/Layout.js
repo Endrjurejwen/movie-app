@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import Navigation from '../Navigation/Navigation';
+import Navigation from '../../containers/Navigation/Navigation';
 import Footer from '../Footer/Footer';
 
 const layout = ({ children }) => (

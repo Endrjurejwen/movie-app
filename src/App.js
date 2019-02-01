@@ -12,12 +12,12 @@ import thunk from 'redux-thunk';
 
 import rootReducer from './rootReducer';
 
-import Layout from './components/Layout/Layout';
-import Home from './components/Home/Home';
-import Movies from './components/Movies/Movies';
-import MovieDetails from './components/Movies/MovieDetails';
-import MovieSearchList from './components/Movies/MoviesSearchList';
-import Favorites from './components/Favorites/Favorites';
+import Layout from './Layout/components/Layout/Layout';
+import Home from './Home/components/Home/Home';
+import Movies from './Movies/containers/Movies/Movies';
+import MovieDetails from './Movies/containers/MovieDetails/MovieDetails';
+import MovieSearchList from './Movies/containers/MoviesSearchList/MoviesSearchList';
+import Favorites from './Movies/containers/Favorites/Favorites';
 
 const store = createStore(
   rootReducer,
