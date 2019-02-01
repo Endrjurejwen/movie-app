@@ -4,6 +4,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import { media, flexCenter, spacing } from 'utilities';
+import {
+  Icon, ButtonIcon, H1, H3,
+} from 'elements';
+
 import {
   getMovie,
   resetMovie,
@@ -11,10 +16,7 @@ import {
   checkIfFavorites,
   removeFromFavorites,
   addToFavorites,
-} from '../../actions';
-
-import media from '../../../utilities/media';
-import Icon from '../../../utilities/icon';
+} from 'Movies/actions';
 
 class MovieDetails extends Component {
   static propTypes = {
@@ -68,6 +70,7 @@ class MovieDetails extends Component {
           }`}
         />
         <DetailsContainer>
+          <OverviewTitle>Overview</OverviewTitle>
           <p>{movie.overview}</p>
           <LoveButton
             onClick={movie.isFavorite
@@ -83,35 +86,34 @@ class MovieDetails extends Component {
             />
           </LoveButton>
         </DetailsContainer>
-
       </MovieGrid>
     );
   }
 }
 
 const MovieGrid = styled.div`
-  padding: 30px 0;
+  padding: ${spacing[4]} 0;
   display: grid;
-  grid-row-gap: 30px;
-  grid-template-columns: 20px 1fr 1fr 20px;
+  grid-row-gap: ${spacing[4]}
+  grid-template-columns: ${spacing[3]} 1fr 1fr ${spacing[3]};
 
   ${media.phone`
-    grid-template-columns: 50px 3fr 2fr 50px;
-    grid-gap: 50px;
+    grid-template-columns: ${spacing[6]} 3fr 2fr ${spacing[6]};
+    grid-gap: ${spacing[6]};
   `}
 `;
 
-const Title = styled.h1`
+const Title = styled(H1)`
   grid-column: 2 / 4;
+  text-align: center;
+  margin-top: ${spacing[4]}
 `;
 
 const DetailsContainer = styled.div`
-  display: flex;
+  ${flexCenter({ justifyContent: 'space-around', alignItems: 'flex-start' })}
+
   flex-direction: column;
-  justify-content: space-around;
-  align-items: flex-start;
   grid-column: 2 / 4;
-  align-self: stretch;
   text-align: left;
 
   ${media.tablet`
@@ -119,6 +121,11 @@ const DetailsContainer = styled.div`
     grid-column: 3 / 4;
     align-self: stretch;
   `}
+`;
+
+const OverviewTitle = styled(H3)`
+  align-self: center;
+  margin-bottom: ${spacing[3]};
 `;
 
 const Background = styled.div`
@@ -135,13 +142,10 @@ const Background = styled.div`
   `}
 `;
 
-const LoveButton = styled.button`
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const LoveButton = styled(ButtonIcon)`
+  position: relative;
+  align-self: center;
+  margin: ${spacing[4]} 0;
 `;
 
 const mapStateToProps = state => ({

@@ -2,8 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import { media } from 'utilities';
+
 import NavigationItem from './NavigationItem/NavigationItem';
-import media from '../../../utilities/media';
 
 const NAVIGATION_ITEMS = [
   { name: 'Home', path: '/home' },

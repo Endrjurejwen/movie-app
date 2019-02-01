@@ -5,15 +5,23 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
-import MenuButton from '../../../elements/MenuButton';
-import SideDrawer from '../../components/SideDrawer/SideDrawer';
-import NavigationItems from '../../components/NavigationItems/NavigationItems';
-import Backdrop from '../../../elements/Backdrop';
-import SearchBar from '../../components/SearchBar/SearchBar';
-import Logo from '../../../utilities/Logo';
+import { Backdrop, Logo } from 'elements';
+import {
+  primary,
+  textLight,
+  fixed,
+  flexCenter,
+  elevation,
+  spacing,
+} from 'utilities';
 
-import { toggleMenu } from '../../actions';
-import { getSearchMovies, resetMovies } from '../../../Movies/actions';
+import MenuButton from 'Layout/components/MenuButton/MenuButton';
+import SideDrawer from 'Layout/components/SideDrawer/SideDrawer';
+import NavigationItems from 'Layout/components/NavigationItems/NavigationItems';
+import SearchBar from 'Layout/components/SearchBar/SearchBar';
+
+import { toggleMenu } from 'Layout/actions';
+import { getSearchMovies, resetMovies } from 'Movies/actions';
 
 class Navigation extends Component {
   static propTypes = {
@@ -77,18 +85,15 @@ class Navigation extends Component {
 }
 
 const NavContainer = styled.div`
-  color: #fff;
-  background-color: #5E35B1;
+  ${fixed()};
+  ${flexCenter({ justifyContent: 'space-between' })};
+  ${elevation[3]};
+
+  color: ${textLight};
+  background-color: ${primary};
   width: 100vw;
   height: 50px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  padding: 0 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, .14), 0 3px 6px rgba(0, 0, 0, .24);
+  padding: 0 ${spacing[3]};
 `;
 
 const mapStateToProps = state => ({

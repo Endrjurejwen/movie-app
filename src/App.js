@@ -1,7 +1,6 @@
 /* eslint react/prefer-stateless-function: 0 */
 
 import React, { Component } from 'react';
-import './App.css';
 import {
   BrowserRouter, Route, Switch, Redirect,
 } from 'react-router-dom';
@@ -10,14 +9,16 @@ import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
-import rootReducer from './rootReducer';
+import rootReducer from 'rootReducer';
 
-import Layout from './Layout/components/Layout/Layout';
-import Home from './Home/components/Home/Home';
-import Movies from './Movies/containers/Movies/Movies';
-import MovieDetails from './Movies/containers/MovieDetails/MovieDetails';
-import MovieSearchList from './Movies/containers/MoviesSearchList/MoviesSearchList';
-import Favorites from './Movies/containers/Favorites/Favorites';
+import Layout from 'Layout/components/Layout/Layout';
+import Home from 'Home/components/Home/Home';
+import Movies from 'Movies/containers/Movies/Movies';
+import MovieDetails from 'Movies/containers/MovieDetails/MovieDetails';
+import MovieSearchList from 'Movies/containers/MoviesSearchList/MoviesSearchList';
+import Favorites from 'Movies/containers/Favorites/Favorites';
+
+import GlobalStyle from 'Global';
 
 const store = createStore(
   rootReducer,
@@ -30,7 +31,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <BrowserRouter>
-          <div className="App">
+          <div>
             <Layout>
               <Switch>
                 <Route exact path="/home" component={Home} />
@@ -41,6 +42,7 @@ class App extends Component {
                 <Redirect exact from="/" to="/home" />
               </Switch>
             </Layout>
+            <GlobalStyle />
           </div>
         </BrowserRouter>
       </Provider>

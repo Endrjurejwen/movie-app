@@ -1,28 +1,35 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
-import bg from '../../../assets/images/clipart584687b.png';
-import media from '../../../utilities/media';
+import bg from 'assets/images/clipart584687b.png';
+import {
+  media, textDark, flexCenter, absolute, spacing,
+} from 'utilities';
+import { ButtonCTA, H1 } from 'elements';
 
 const home = props => (
-  <StyledMain>
+  <Main>
     <Container>
-      <Title>Movie Lovers</Title>
-      <p>Explore movies, write reviews and collect what you love.</p>
-      <CTAbutton type="button" onClick={() => props.history.push('/movies')}>Explore movies</CTAbutton>
+      <div>
+        <Title>Movie Lovers</Title>
+        <p>Explore movies, write reviews and collect what you love.</p>
+      </div>
+      <Button type="button" onClick={() => props.history.push('/movies')}>Explore movies</Button>
     </Container>
-  </StyledMain>
+  </Main>
 );
 
-const StyledMain = styled.main`
-  background-image: url(${bg});
+home.propTypes = {
+  history: PropTypes.shape().isRequired,
+};
+
+const Main = styled.main`
+  ${flexCenter()};
+
+  background: url(${bg}) no-repeat 45% 35px;
   background-size: 40%;
-  background-repeat: no-repeat;
-  background-position: 45% 35px;
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
   ${media.tablet`
     background-size: 20%;
@@ -32,36 +39,23 @@ const StyledMain = styled.main`
   `}
 `;
 
-const Title = styled.h1`
-  font-size: 44px;
-  color: #333;
+const Title = styled(H1)`
+  color: ${textDark};
+  line-height: 1.2;
 `;
 
 const Container = styled.div`
-  padding: 30px;
+  text-align: center;
 
   ${media.tablet`
-    position: absolute;
-    top: 380px;
-    left: 80px;
+    ${absolute({ x: '80px', y: '380px' })};
+
     text-align: left;
   `}
 `;
 
-const CTAbutton = styled.button`
-  margin-top: 20px;
-
-  padding: 10px 25px;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: .15em;
-  font-weight: bold;
-  border-radius: 4px;
-  border: 2px solid #5E35B1;
-  background-color: #5E35B1;
-  color: #eee;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, .14);
-  cursor: pointer
+const Button = styled(ButtonCTA)`
+  margin-top: ${spacing[4]};
 `;
 
 

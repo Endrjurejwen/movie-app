@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { darkPrimary, textLight, flexCenter } from 'utilities';
 
 const Footer = () => (
   <StyledFooter>
@@ -8,14 +9,13 @@ const Footer = () => (
 );
 
 const StyledFooter = styled.div`
+  ${flexCenter()};
+
   height: 120px;
   width: 100%;
-  background-color: #3e2280;
-  color: #eee;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 14px;
+  background-color: ${darkPrimary};
+  color: ${textLight};
+  font-size: .75rem;
 `;
 
 export default Footer;

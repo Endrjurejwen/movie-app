@@ -2,8 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import Navigation from '../../containers/Navigation/Navigation';
-import Footer from '../Footer/Footer';
+import { bodyBackground } from 'utilities';
+
+import Navigation from 'Layout/containers/Navigation/Navigation';
+import Footer from 'Layout/components/Footer/Footer';
 
 const layout = ({ children }) => (
   <>
@@ -20,8 +22,8 @@ layout.propTypes = {
 };
 
 const Container = styled.div`
-  background-image: linear-gradient(to right top, #eeeeee, #e6e4ed, #ded9ec, #d7cfeb, #d1c4e9);
-  margin-top: 40px;
+  background-image: ${bodyBackground};
+  padding-top: 40px;
   min-height: 100vh;
 `;
 

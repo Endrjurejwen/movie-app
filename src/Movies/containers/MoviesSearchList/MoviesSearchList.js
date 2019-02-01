@@ -2,16 +2,20 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import styled from 'styled-components';
 
+import { H1 } from 'elements';
+import { spacing } from 'utilities';
+
+import MoviesGrid from 'Movies/components/MoviesGrid/MoviesGrid';
 import {
   getMovies,
   checkIfFavorites,
   addToFavorites,
   removeFromFavorites,
   getSearchMovies,
-} from '../../actions';
+} from 'Movies/actions';
 
-import MoviesGrid from '../../components/MoviesGrid/MoviesGrid';
 
 class moviesSearchList extends Component {
   static propTypes = {
@@ -72,13 +76,7 @@ class moviesSearchList extends Component {
     const { movies } = this.props;
     return (
       <>
-        <h1
-          style={{
-            padding: '40px 0', fontSize: '35px', textTransform: 'uppercase', color: '#333',
-          }}
-        >
-          {'Your Search Movies'}
-        </h1>
+        <Title>Your Search Movies</Title>
         <MoviesGrid
           movies={movies}
           add={this.addToFavoritesHandler}
@@ -88,6 +86,11 @@ class moviesSearchList extends Component {
     );
   }
 }
+
+const Title = styled(H1)`
+  text-align: center;
+  margin-top: ${spacing[6]};
+`;
 
 const mapStateToProps = state => ({
   movies: state.movies.movies,

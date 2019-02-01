@@ -2,7 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import Icon from '../../../utilities/icon';
+import { ButtonCTA, Icon, H5 } from 'elements';
+import {
+  cardBackgroundLight, flexCenter, elevation, spacing,
+} from 'utilities';
 
 const movieCard = ({
   title, date, bgImage, readMore, addOrRemoveFavorite, iconName,
@@ -12,7 +15,7 @@ const movieCard = ({
     <Details>
       <Title>{title}</Title>
       <Description>{date}</Description>
-      <MoreButton type="button" onClick={readMore}>Read more</MoreButton>
+      <ButtonCTA type="button" onClick={readMore}>Read more</ButtonCTA>
       <LoveButton onClick={addOrRemoveFavorite} type="button"><Icon name={iconName} width="30px" height="30px" color="#5E35B1" /></LoveButton>
     </Details>
   </Card>
@@ -35,17 +38,16 @@ movieCard.defaultProps = {
 };
 
 const Card = styled.div`
-  //border: 1px solid #222;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, .24);
-  margin: 10px;
+  ${elevation[2]};
+
+  margin: ${spacing[1]};
   max-width: 500px;
   border-radius: 5px;
   overflow: hidden;
-  background-color: #eee;
+  background-color: ${cardBackgroundLight};
 `;
 
 const Background = styled.div`
-  // width: auto;
   height: 165px;
   background-image: url(${({ backgroundImage }) => backgroundImage});
   background-size: cover;
@@ -55,18 +57,15 @@ const Background = styled.div`
 
 const Details = styled.div`
   text-align: left;
-  padding: 20px;
+  padding: ${spacing[2]};
   display: grid;
-  grid-template-rows: 40px 1fr 1fr;
+  grid-template-rows: minmax(40px, auto) 1fr 1fr;
   grid-template-columns: 70% 30%;
-  grid-gap: 10px;
+  grid-gap: ${spacing[1]};
 `;
 
-const Title = styled.h3`
+const Title = styled(H5)`
   grid-column: 1 / -1;
-  color: #222;
-  text-transform: uppercase;
-  font-size: 18px;
 `;
 
 const Description = styled.p`
@@ -74,22 +73,12 @@ const Description = styled.p`
   grid-row: 2;
 `;
 
-const MoreButton = styled.button`
-  padding: 10px 0;
-  border-radius: 4px;
-  border: 2px solid #5E35B1;
-  background-color: #5E35B1;
-  color: #fff;
-  cursor: pointer;
-`;
-
 const LoveButton = styled.button`
+  ${flexCenter()};
+
   background-color: transparent;
   border: none;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  cursor: pointer; 
 `;
 
 export default movieCard;

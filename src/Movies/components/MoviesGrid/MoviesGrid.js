@@ -2,7 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import MovieCard from '../MovieCard/MovieCard';
+
+import { spacing } from 'utilities';
+
+import MovieCard from 'Movies/components/MovieCard/MovieCard';
 
 const MoviesGrid = ({
   movies, history, add, remove,
@@ -42,10 +45,10 @@ MoviesGrid.defaultProps = {
 };
 
 const GridWrapper = styled.main`
-  padding: 30px;
+  padding: ${spacing[5]};
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  grid-gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-gap: ${spacing[4]};
 `;
 
 export default withRouter(MoviesGrid);

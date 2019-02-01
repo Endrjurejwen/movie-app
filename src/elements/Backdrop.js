@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { backdropBackground, fixed } from 'utilities';
 
 const backdrop = ({ close }) => <Background onClick={close} />;
 
@@ -9,12 +10,11 @@ backdrop.propTypes = {
 };
 
 const Background = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
+  ${fixed()};
+  
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${backdropBackground};
   z-index: 20;
 `;
 

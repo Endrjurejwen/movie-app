@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import media from '../utilities/media';
+import { media, textLight, spacing } from 'utilities';
 
 const menuButton = ({ toggleMenu, isOpen }) => (
   <StyledButton onClick={toggleMenu}>
@@ -22,7 +22,7 @@ const StyledButton = styled.button`
   height: 100%;
   border: none;
   background-color: transparent;
-  padding: 0 15px;
+  padding: 0 ${spacing[3]};
 
   ${media.tablet`
     display: none;
@@ -31,14 +31,14 @@ const StyledButton = styled.button`
 
 const MenuIcon = styled.div`
   position: relative;
-  background-color: ${({ isOpen }) => (isOpen ? 'transparent' : '#fff')};
+  background-color: ${({ isOpen }) => (isOpen ? 'transparent' : textLight)};
   width: 22px;
   height: 2px;
 
   &::before, &::after {
     content: "";
     position: absolute;
-    background-color: #fff;
+    background-color: ${textLight};
     width: 22px;
     height: 2px;
     left: 0;

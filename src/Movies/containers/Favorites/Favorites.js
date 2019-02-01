@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import MoviesGrid from '../../components/MoviesGrid/MoviesGrid';
+import MoviesGrid from 'Movies/components/MoviesGrid/MoviesGrid';
+import styled from 'styled-components';
 
-import { removeFromFavorites, checkIfFavorites } from '../../actions';
+import { H1 } from 'elements';
+import { spacing } from 'utilities';
+
+import { removeFromFavorites, checkIfFavorites } from 'Movies/actions';
 
 class Favorites extends Component {
   static propTypes = {
@@ -34,18 +38,17 @@ class Favorites extends Component {
     const { favoritesMovies } = this.props;
     return (
       <>
-        <h1
-          style={{
-            padding: '40px 0', fontSize: '35px', textTransform: 'uppercase', color: '#333',
-          }}
-        >
-          {'Your Favorites Movies'}
-        </h1>
+        <Title>Your Favorites Movies</Title>
         <MoviesGrid movies={favoritesMovies} remove={this.removeFromFavoritesHandler} />
       </>
     );
   }
 }
+
+const Title = styled(H1)`
+  text-align: center;
+  margin-top: ${spacing[6]};
+`;
 
 const mapStateToProps = state => ({
   favoritesMovies: state.movies.favoritesMovies,

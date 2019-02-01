@@ -27,5 +27,6 @@ module.exports = {
       "linebreak-style": 0,
       "eol-last": 0,
       "no-shadow": "off",
+      'import/no-unresolved': "off",
     }
   };

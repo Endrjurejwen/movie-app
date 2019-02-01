@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
-import media from '../../../../utilities/media';
+import {
+  media, textLight, linkHover, flexCenter, spacing,
+} from 'utilities';
 
 const navigationItem = ({
   name, path, closeMenu,
@@ -25,51 +27,50 @@ navigationItem.defaultProps = {
 };
 
 const NavItem = styled.li`
+  ${flexCenter()};
+  
   background-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 75%;
 
   ${media.tablet`
-    padding: 0 10px;
+    padding: 0 ${spacing[2]};
     height: 100%;
   `}
 `;
 
 const Link = styled(NavLink)`
   text-transform: uppercase;
-  padding: 20px;
-  font-size: 18px;
+  padding: ${spacing[2]};
+  font-size: 1.4rem;
   background-color: transparent;
   display: block;
   width: 100%;
   text-decoration: none;
-  color: #fff;
+  color: ${textLight};
   cursor: pointer;
   height: 100%;
   transition: color .2s;
 
   &:hover,
   &:focus {
-    color: pink;
+    color: ${linkHover};
   }
 
   ${media.tablet`
-    font-size: 16px;
+    ${flexCenter()};
+
+    font-size: 1rem;
     background-color: transparent;
     height: 100%;
-    display: flex;
-    align-items: center;
     border-bottom: 2px solid transparent;
 
     &.active {
-      border-bottom: 2px solid #fff;
+      border-bottom: 2px solid ${textLight};
     }
 
     &:hover {
       color: pink;
-      border-bottom: 2px solid #fff;
+      border-bottom: 2px solid ${textLight};
     }
   `}
 `;
