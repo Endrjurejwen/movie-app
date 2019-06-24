@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import {
-  BrowserRouter, Route, Switch, Redirect,
+  HashRouter, Route, Switch, Redirect,
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
@@ -30,7 +30,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <BrowserRouter>
+        <HashRouter>
           <div>
             <Layout>
               <Switch>
@@ -44,7 +44,7 @@ class App extends Component {
             </Layout>
             <GlobalStyle />
           </div>
-        </BrowserRouter>
+        </HashRouter>
       </Provider>
     );
   }

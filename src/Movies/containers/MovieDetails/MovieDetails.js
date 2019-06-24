@@ -94,7 +94,7 @@ class MovieDetails extends Component {
 const MovieGrid = styled.div`
   padding: ${spacing[4]} 0;
   display: grid;
-  grid-row-gap: ${spacing[4]}
+  grid-row-gap: ${spacing[4]};
   grid-template-columns: ${spacing[3]} 1fr 1fr ${spacing[3]};
 
   ${media.phone`
