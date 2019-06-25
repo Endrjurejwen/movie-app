@@ -12,6 +12,7 @@ Single-page Application with search engine powered by Movie DB Api.
 - Redux v. 4 - for state management
 - React-redux
 - Redux-thunk - for async operations in redux
+- Axios - for http requests
 - Styled-components - for style and animation
 - Prop-types - for react props checking
 - Airbnb-extended eslint - for linting
