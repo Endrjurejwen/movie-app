@@ -61,7 +61,7 @@ const Link = styled(NavLink)`
 
     font-size: 1rem;
     background-color: transparent;
-    height: 100%;
+    /* height: 100%; */
     border-bottom: 2px solid transparent;
 
     &.active {
