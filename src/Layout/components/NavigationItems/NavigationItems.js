@@ -10,7 +10,6 @@ const NAVIGATION_ITEMS = [
   { name: 'Home', path: '/home' },
   { name: 'Movies', path: '/movies' },
   { name: 'Favorites', path: '/favorites' },
-  { name: 'Contact', path: '/contact' },
 ];
 
 const navigationItems = ({ closeMenu, desktop }) => (

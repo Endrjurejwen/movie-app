@@ -35,6 +35,10 @@ class Navigation extends Component {
     searchText: '',
   }
 
+  navigationHandler = () => {
+    this.props.history.push('/home');
+  }
+
   changeHandler = (event) => {
     this.setState({
       searchText: event.target.value,
@@ -71,7 +75,7 @@ class Navigation extends Component {
         <MenuButton toggleMenu={toggleMenu} isOpen={isMenuOpen} />
         <SideDrawer isOpen={isMenuOpen} closeMenu={toggleMenu} />
         {isMenuOpen && <Backdrop close={toggleMenu} />}
-        <Logo height="50%" />
+        <Logo height="50%" onClick={this.navigationHandler} />
         <SearchBar
           change={this.changeHandler}
           submit={this.submitHandler}
@@ -94,6 +98,7 @@ const NavContainer = styled.div`
   width: 100vw;
   height: 50px;
   padding: 0 ${spacing[3]};
+  z-index: 10;
 `;
 
 const mapStateToProps = state => ({
